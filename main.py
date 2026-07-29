@@ -34,8 +34,8 @@ def add_single_student(addnewstudent=Body()):
 
 
 #update(PUT)
-@app.put('/update_student_details_by_id/{studentid}')
-def single_student(name:str,course:str,student_id:int):
+@app.put('/update_student_details_by_id/{student_id}')   #path parameter
+def single_student(name:str,course:str,student_id:int):   #query parameter
    dict_={"name":name,"course":course,"studentid":student_id}
    for i in students:
       if i['studentid']==student_id:
@@ -47,7 +47,7 @@ def single_student(name:str,course:str,student_id:int):
 
 
 #DELETE
-@app.delete('/delete_student_details_by_id/{studentid}')
+@app.delete('/delete_student_details_by_id/{student_id}')
 def single_student(student_id:int):
    for i in range(len(students)):
       if students[i]['studentid']==student_id:
