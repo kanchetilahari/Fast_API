@@ -4,10 +4,10 @@ from fastapi import FastAPI,Body
 
 app=FastAPI()
 students = [
-    {"name":"srihari","course":"DS","studentid":1},
-    {"name":"srinu","course":"DA","studentid":2},
-    {"name":"rajesh","course":"DS","studentid":3},
-    {"name":"Srikanth","course":"DA","studentid":4}]
+    {"name":"srihari","course":"DS","student_id":1},
+    {"name":"srinu","course":"DA","student_id":2},
+    {"name":"rajesh","course":"DS","student_id":3},
+    {"name":"Srikanth","course":"DA","student_id":4}]
 
 @app.get('/')
 def hpme_page():
@@ -21,7 +21,7 @@ def view_all_students():
 @app.get('/get_single_students_by_id/{student_id}')   #path parameter {}
 def single_student(student_id:int):
    for i in students:
-      if i['studentid']==student_id:
+      if i['student_id']==student_id:
          return{"request":"GET",
                "result":i}
    return{"message":"student id you are looking for is not available in the student list"}
@@ -36,9 +36,9 @@ def add_single_student(addnewstudent=Body()):
 #update(PUT)
 @app.put('/update_student_details_by_id/{student_id}')   #path parameter
 def single_student(name:str,course:str,student_id:int):   #query parameter
-   dict_={"name":name,"course":course,"studentid":student_id}
+   dict_={"name":name,"course":course,"student_id":student_id}
    for i in students:
-      if i['studentid']==student_id:
+      if i['student_id']==student_id:
          p=i.update(dict_)
          return{"request":"PUT",
                "previous detail":i
@@ -50,7 +50,7 @@ def single_student(name:str,course:str,student_id:int):   #query parameter
 @app.delete('/delete_student_details_by_id/{student_id}')
 def single_student(student_id:int):
    for i in range(len(students)):
-      if students[i]['studentid']==student_id:
+      if students[i]['student_id']==student_id:
          
          d=students.pop(i)
          return{"request":"DELETE",
